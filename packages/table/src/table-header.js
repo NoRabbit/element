@@ -112,7 +112,9 @@ export default {
                         {
                           column.renderHeader
                             ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
-                            : column.label
+                            : column.canRenderSlotHeader()
+                              ? column.renderSlotHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
+                              : column.label
                         }
                         {
                           column.sortable

@@ -253,6 +253,8 @@ export default {
       type,
       renderCell: null,
       renderHeader: this.renderHeader,
+      renderSlotHeader: null,
+      canRenderSlotHeader: null,
       minWidth,
       width,
       isColumnGroup,
@@ -331,6 +333,18 @@ export default {
         ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
+
+    column.canRenderSlotHeader = function() {
+      if (_self.$scopedSlots.header) {
+        return true;
+      }
+      return false;
+    };
+
+    column.renderSlotHeader = function(h, data) {
+      return _self.$scopedSlots.header(data);
+    };
+
   },
 
   destroyed() {
